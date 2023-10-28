@@ -54,8 +54,21 @@ if (!empty($_POST["save"])) {
                 <td><input type="number" name="harga"></td>
             </tr>
             <tr>
-                <td>Kategori ID</td>
-                <td><input type="number" name="kategori_id"></td>
+                <td>Kategori</td>
+                <td>
+                    <select name="kategori_id" id="kategori_id">
+                        <option value="">--Pilih--</option>
+                        <?php
+                        $data = mysqli_query($koneksi, 'select * from kategori');
+
+                        while ($d = mysqli_fetch_array($data)) {
+                        ?>
+                            <option value="<?= $d['id_kategri']; ?>"><?= $d['nama_kategori']; ?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td></td>

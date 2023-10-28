@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,19 +18,21 @@ if (!empty($_POST["save"])) {
     $barangId = $_POST["barang_id"];
     $jumlahTransaksi = $_POST["jumlah_transaksi"];
     $userId = $_POST["user_id"];
+    $memberID = $_POST["member_id"];
     //input data ke database
-    $a= mysqli_query($koneksi, "insert into transaksi values ('','$tglTransaksi','$noTransaksi','$jenisTransaksi',
-                        '$barangId','$jumlahTransaksi','$userId')");
+    $a = mysqli_query($koneksi, "insert into transaksi values ('','$tglTransaksi','$noTransaksi','$jenisTransaksi',
+                        '$barangId','$jumlahTransaksi','$userId','$memberID')");
     if ($a) {
         //mengalihkan halaman kembali
-        header ("location: tampil_transaksi.php");
+        header("location: tampil_transaksi.php");
     } else {
         echo mysqli_error($koneksi);
     }
 }
 ?>
+
 <body>
-<h2>Pemrprograman 3 2023</h2>
+    <h2>Pemrprograman 3 2023</h2>
     <br>
     <a href="tampil_transaksi.php">KEMBALI</a>
     <br>
@@ -50,22 +53,66 @@ if (!empty($_POST["save"])) {
                 <td><input type="text" name="jenis_transaksi"></td>
             </tr>
             <tr>
-                <td>Barang ID</td>
-                <td><input type="number" name="barang_id"></td>
+                <td>Barang</td>
+                <td>
+                    <select name="barang_id" id="barang_id">
+                        <option value="">--Pilih--</option>
+                        <?php
+                        $data = mysqli_query($koneksi, 'select * from barang');
+
+                        while ($d = mysqli_fetch_array($data)) {
+                        ?>
+                            <option value="<?= $d['id_barang']; ?>"><?= $d['nama_barang']; ?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td>Jumlah Transaksi</td>
                 <td><input type="number" name="jumlah_transaksi"></td>
             </tr>
             <tr>
-                <td>User ID</td>
-                <td><input type="number" name="user_id"></td>
+                <td>User</td>
+                <td>
+                    <select name="user_id" id="user_id">
+                        <option value="">--Pilih--</option>
+                        <?php
+                        $data = mysqli_query($koneksi, 'select * from user');
+
+                        while ($d = mysqli_fetch_array($data)) {
+                        ?>
+                            <option value="<?= $d['id_user']; ?>"><?= $d['nama']; ?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Member</td>
+                <td>
+                    <select name="member_id" id="member_id">
+                        <option value="">--Pilih--</option>
+                        <?php
+                        $data = mysqli_query($koneksi, 'select * from member');
+
+                        while ($d = mysqli_fetch_array($data)) {
+                        ?>
+                            <option value="<?= $d['id_member']; ?>"><?= $d['nama_member']; ?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td></td>
                 <td><input type="submit" name="save"></td>
             </tr>
         </table>
-    </form> 
+    </form>
 </body>
+
 </html>

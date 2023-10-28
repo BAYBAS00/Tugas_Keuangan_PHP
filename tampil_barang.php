@@ -27,7 +27,7 @@
         <?php
         include 'koneksi.php';
         $no = 1;
-        $data = mysqli_query($koneksi, "select * from barang");
+        $data = mysqli_query($koneksi, "select kategori.nama_kategori, barang.* from barang JOIN kategori ON kategori.id_kategri=barang.kategori_id");
         while ($d = mysqli_fetch_array($data)) {
         ?>
             <tr>
@@ -37,7 +37,7 @@
                 <td><?php echo $d['kode_barang']; ?></td>
                 <td><?php echo $d['qty']; ?></td>
                 <td><?php echo $d['harga']; ?></td>
-                <td><?php echo $d['kategori_id']; ?></td>
+                <td><?php echo $d['nama_kategori']; ?></td>
                 <td>
                     <a href="edit_barang.php?id=<?php echo $d['id']; ?>">EDIT</a> |
                     <a href="hapus_barang.php?id=<?php echo $d['id']; ?>">HAPUS</a>

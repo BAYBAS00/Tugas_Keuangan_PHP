@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pemrograman3.com</title>
 </head>
+
 <body>
-<h2>Pemrograman 3 2023</h2>
+    <h2>Pemrograman 3 2023</h2>
     <br>
     <a href="input_transaksi.php">+ TAMBAH TRANSAKSI</a>
     <br>
@@ -18,34 +20,38 @@
             <th>Tanggal</th>
             <th>Nomor Transaksi</th>
             <th>Jenis Transaksi</th>
-            <th>Barang ID</th>
+            <th>Barang</th>
             <th>Jumlah Transaksi</th>
-            <th>User ID</th>
+            <th>User</th>
+            <th>Member</th>
             <th>OPSI</th>
         </tr>
         <?php
         include 'koneksi.php';
         $no = 1;
-        $data = mysqli_query($koneksi, "select * from transaksi");
-        while ($d = mysqli_fetch_array($data)){
+        $data = mysqli_query($koneksi, "select barang.nama_barang, user.nama, member.nama_member, transaksi.* from transaksi JOIN barang ON transaksi.barang_id=barang.id_barang
+                                        JOIN user ON transaksi.user_id=user.id_user JOIN member ON transaksi.id_member=member.id_member");
+        while ($d = mysqli_fetch_array($data)) {
         ?>
             <tr>
-            <td><?php echo $no++; ?></td>
-            <td><?php echo $d['id_transaksi']; ?></td>
-            <td><?php echo $d['tgl_transaksi']; ?></td>
-            <td><?php echo $d['no_transaksi']; ?></td>
-            <td><?php echo $d['jenis_transaksi']; ?></td>
-            <td><?php echo $d['barang_id']; ?></td>
-            <td><?php echo $d['jumlah_transaksi']; ?></td>
-            <td><?php echo $d['user_id']; ?></td>
-            <td>
-                <a href="edit_transaksi.php?id=<?php echo $d['id']; ?>">EDIT</a> |
-                <a href="hapus_transaksi.php?id=<?php echo $d['id']; ?>">HAPUS</a>
-            </td>
-        </tr> 
-        <?php   
+                <td><?php echo $no++; ?></td>
+                <td><?php echo $d['id_transaksi']; ?></td>
+                <td><?php echo $d['tgl_transaksi']; ?></td>
+                <td><?php echo $d['no_transaksi']; ?></td>
+                <td><?php echo $d['jenis_transaksi']; ?></td>
+                <td><?php echo $d['nama_barang']; ?></td>
+                <td><?php echo $d['jumlah_transaksi']; ?></td>
+                <td><?php echo $d['nama']; ?></td>
+                <td><?php echo $d['nama_member']; ?></td>
+                <td>
+                    <a href="edit_transaksi.php?id=<?php echo $d['id']; ?>">EDIT</a> |
+                    <a href="hapus_transaksi.php?id=<?php echo $d['id']; ?>">HAPUS</a>
+                </td>
+            </tr>
+        <?php
         }
         ?>
     </table>
 </body>
+
 </html>

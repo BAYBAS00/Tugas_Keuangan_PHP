@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pemrogrman3.com</title>
+    <title>Pemograman3.com</title>
 </head>
 <?php
 // koneksi ke database
@@ -12,13 +12,13 @@ include "koneksi.php";
 // menangkap data yang dikirim ke database
 if (!empty($_POST["save"])) {
 
-    $Nama = $_POST["nama_kategori"];
-    $diskonkategori = $_POST["diskon_kategori"];
+    $Level = $_POST["jenis_level"];
+    $Diskon = $_POST["jumlah_diskon_lvl"];
     //input data ke database
-    $a = mysqli_query($koneksi, "insert into kategori values ('','$Nama','$diskonkategori')");
+    $a = mysqli_query($koneksi, "insert into level values ('','$Level','$Diskon')");
     if ($a) {
         //mengalihkan halaman kembali
-        header("location: tampil_kategori.php");
+        header("location: tampil_level.php");
     } else {
         echo mysqli_error($koneksi);
     }
@@ -26,21 +26,21 @@ if (!empty($_POST["save"])) {
 ?>
 
 <body>
-    <h2>Pemrprograman 3 2023</h2>
+    <h2>Pemograman 3 2023</h2>
     <br>
-    <a href="tampil_kategori.php">KEMBALI</a>
+    <a href="tampil_level.php">KEMBALI</a>
     <br>
     <br>
-    <h3>TAMBAH DATA KATEGORI</h3>
+    <h3>TAMBAH DATA LEVEL</h3>
     <form method="POST">
         <table>
             <tr>
-                <td>Nama Kategori</td>
-                <td><input type="text" name="nama_kategori"></td>
+                <td>Level</td>
+                <td><input type="text" name="jenis_level"></td>
             </tr>
             <tr>
-                <td>Diskon Kategori</td>
-                <td><input type="number" name="diskon_kategori" value="0"></td>
+                <td>Diskon</td>
+                <td><input type="text" name="jumlah_diskon_lvl" value="0"></td>
             </tr>
             <tr>
                 <td></td>
