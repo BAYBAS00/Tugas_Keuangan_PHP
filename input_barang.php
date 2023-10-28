@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,19 +15,21 @@ if (!empty($_POST["save"])) {
     $Nama = $_POST["nama_barang"];
     $kodeBarang = $_POST["kode_barang"];
     $Qty = $_POST["qty"];
+    $Harga = $_POST["harga"];
     $kategoriID = $_POST["kategori_id"];
     //input data ke database
-    $a= mysqli_query($koneksi, "insert into barang values ('','$Nama', '$kodeBarang','$Qty','$kategoriID')");
+    $a = mysqli_query($koneksi, "insert into barang values ('','$Nama', '$kodeBarang','$Qty','$Harga','$kategoriID')");
     if ($a) {
         //mengalihkan halaman kembali
-        header ("location: tampil_barang.php");
+        header("location: tampil_barang.php");
     } else {
         echo mysqli_error($koneksi);
     }
 }
 ?>
+
 <body>
-<h2>Pemrprograman 3 2023</h2>
+    <h2>Pemrprograman 3 2023</h2>
     <br>
     <a href="tampil_barang.php">KEMBALI</a>
     <br>
@@ -47,6 +50,10 @@ if (!empty($_POST["save"])) {
                 <td><input type="number" name="qty"></td>
             </tr>
             <tr>
+                <td>Harga</td>
+                <td><input type="number" name="harga"></td>
+            </tr>
+            <tr>
                 <td>Kategori ID</td>
                 <td><input type="number" name="kategori_id"></td>
             </tr>
@@ -57,4 +64,5 @@ if (!empty($_POST["save"])) {
         </table>
     </form>
 </body>
+
 </html>
