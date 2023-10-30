@@ -34,7 +34,7 @@
             $level = $d['jenis_level'];
             $totalPembelian = $d['harga'] * $d['jumlah_transaksi'];
 
-            if ($totalPembelian > 100000) {
+            if ($totalPembelian > 100000 && ($d['jumlah_diskon_lvl'] != 0)) {
                 $diskonbelanja = 10;
             } else {
                 $diskonbelanja = 0;
