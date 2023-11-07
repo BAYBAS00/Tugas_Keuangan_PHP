@@ -12,7 +12,7 @@ include "koneksi.php";
 if (!empty($_POST["save"])) {
 
     $Nama = $_POST["nama"];
-    $Password = $_POST["password"];
+    $Password = md5($_POST["password"]);
     $Level = $_POST["level"];
     $Status = $_POST["status"];
     //input data ke database
