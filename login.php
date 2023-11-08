@@ -1,23 +1,38 @@
 <?php
+session_start();
+
+    if (isset($_SESSION["login"])) {
+        header("Location: index.php");
+        exit;
+    }
+
+
 include 'koneksi.php';
-if (!empty($_POST['login'])) {
+if (isset($_POST['login'])) {
     $username = $_POST['nama'];
-    $password = $_POST['password'] ? md5($_POST['password']) : '';
+    $password = md5($_POST['password']);
 
-    if (empty($username) && empty($password)) {
-        $err = 'Username dan Password tidak boleh kosong';
-    } elseif (empty($username)) {
-        $err = 'Username tidak boleh kosong';
-    } elseif (empty($password)) {
-        $err = 'Password tidak boleh kosong';
+    if ($username == '' || $password == '') {
+        $err = "Username dan Password tidak boleh kosong";
     } else {
-        $getUser = mysqli_query($koneksi, "select * from user where user.nama='$username' and user.password='$password'");
-        $user = mysqli_fetch_array($getUser);
-        if (empty($user)) {
-            $err = 'Akun tidak ditemukan';
-        } else {
+        $query = "SELECT * FROM user WHERE nama = '$username'";
+        $result = mysqli_query($koneksi, $query);
+ 
 
-            header("location:index.php");
+        if (mysqli_num_rows($result) == 0) {
+            $err = "Username dan Password tidak boleh kosong";
+        } else {
+            $d = mysqli_fetch_array($result);
+
+            if ($d['password'] != $password) {
+                $err = "Akun <b>'$username'</b> tidak ditemukan";
+            } else {
+                //set session
+                $_SESSION["login"] = true;
+                // Login berhasil, arahkan ke halaman lain
+                header('Location: index.php');
+                exit(); // Berhenti eksekusi skrip setelah mengalihkan header
+            }
         }
     }
 }
