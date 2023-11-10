@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if (!isset($_SESSION["nama"])) {
+    header("Location: login.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +19,23 @@
     <h2>Pemrograman 3 2023</h2>
     <br>
     <a href="input_transaksi.php">+ TAMBAH TRANSAKSI</a>
+    <br>
+    <br>
+    <?php
+    if ($_SESSION['level'] == 2 && $_SESSION['status'] == 1) {
+    ?>
+    <a href="view_report.php">View Report</a>
+    <br>
+    <a href="logout.php">LOGOUT</a>
+    <?php
+    } else  if ($_SESSION['level'] == 1 && $_SESSION['status'] == 1) {
+    ?>
+        <a href="index.php">MENU</a>
+    <?php
+    }
+    ?>
+    <br>
+    <!-- <a href="logout.php">LOGOUT</a> -->
     <br>
     <br>
     <table border='1'>

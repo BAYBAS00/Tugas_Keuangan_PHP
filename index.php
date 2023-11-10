@@ -1,9 +1,14 @@
 <?php
 session_start();
 
-if (!isset($_SESSION["login"])) {
+if (!isset($_SESSION["nama"])) {
     header("Location: login.php");
     exit;
+}
+if ($_SESSION['level'] == 2 && $_SESSION['status'] == 1) {
+    // Login berhasil dengan level staff dan status aktif, arahkan ke halaman lain
+    header("location: tampil_transaksi.php");
+    exit(); // Berhenti eksekusi skrip setelah mengalihkan header
 }
 ?>
 <!DOCTYPE html>
@@ -36,6 +41,9 @@ if (!isset($_SESSION["login"])) {
         </tr>
         <tr>
             <td><a href="tampil_user.php">USER</a></td>
+        </tr>
+        <tr>
+            <td><a href="view_report.php">LAPORAN</a></td>
         </tr>
     </table>
 </body>

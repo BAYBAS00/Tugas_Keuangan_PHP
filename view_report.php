@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if (!isset($_SESSION["nama"])) {
+    header("Location: login.php");
+    exit;
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +19,7 @@
 
 <body>
     <h2>Pemograman 3</h2>
-    <a href="/">KEMBALI</a>
+    <a href="index.php">KEMBALI</a>
     <h5>Laporan Transaksi</h5>
     <table border="1">
         <tr>
@@ -47,9 +57,9 @@
                 <td><?php echo $d['nama']; ?></td>
                 <td><?php echo $d['nama_member']; ?></td>
                 <td><?php echo $d['jenis_level']; ?></td>
-                <td><?php echo $d['jumlah_diskon_lvl'].'%'; ?></td>
-                <td><?php echo $d['diskon_kategori'].'%'; ?></td>
-                <td><?php echo $diskonbelanja.'%'; ?></td>
+                <td><?php echo $d['jumlah_diskon_lvl'] . '%'; ?></td>
+                <td><?php echo $d['diskon_kategori'] . '%'; ?></td>
+                <td><?php echo $diskonbelanja . '%'; ?></td>
                 <td><?php echo $totalPembelian; ?></td>
                 <td><?php echo $totaldiskon; ?></td>
                 <td><?php echo $totalTransaksi; ?></td>

@@ -1,3 +1,16 @@
+<?php
+session_start();
+
+if (!isset($_SESSION["nama"])) {
+    header("Location: login.php");
+    exit;
+}
+if ($_SESSION['level'] == 2 && $_SESSION['status'] == 1) {
+    // Login berhasil dengan level staff dan status aktif, arahkan ke halaman lain
+    header("location: tampil_transaksi.php");
+    exit(); // Berhenti eksekusi skrip setelah mengalihkan header
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,6 +25,8 @@
     <br>
     <a href="input_barang.php">+ TAMBAH BARANG</a>
     <br>
+    <br>
+    <a href="index.php">MENU</a>
     <br>
     <table border='1'>
         <tr>

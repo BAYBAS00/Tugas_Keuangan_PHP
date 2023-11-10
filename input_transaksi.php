@@ -7,6 +7,12 @@
     <title>Pemrograman3.com</title>
 </head>
 <?php
+session_start();
+
+if (!isset($_SESSION["nama"])) {
+    header("Location: login.php");
+    exit;
+}
 // koneksi ke database
 include "koneksi.php";
 // menangkap data yang dikirim ke database

@@ -7,6 +7,17 @@
     <title>Pemograman3.com</title>
 </head>
 <?php
+session_start();
+
+if (!isset($_SESSION["nama"])) {
+    header("Location: login.php");
+    exit;
+}
+if ($_SESSION['level'] == 2 && $_SESSION['status'] == 1) {
+    // Login berhasil dengan level staff dan status aktif, arahkan ke halaman lain
+    header("location: tampil_transaksi.php");
+    exit(); // Berhenti eksekusi skrip setelah mengalihkan header
+}
 // koneksi ke database
 include "koneksi.php";
 // menangkap data yang dikirim ke database

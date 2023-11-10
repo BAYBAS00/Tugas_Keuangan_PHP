@@ -1,3 +1,16 @@
+<?php
+session_start();
+
+if (!isset($_SESSION["nama"])) {
+    header("Location: login.php");
+    exit;
+}
+if ($_SESSION['level'] == 2 && $_SESSION['status'] == 1) {
+    // Login berhasil dengan level staff dan status aktif, arahkan ke halaman lain
+    header("location: tampil_transaksi.php");
+    exit(); // Berhenti eksekusi skrip setelah mengalihkan header
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,6 +25,8 @@
     <br>
     <a href="input_kategori.php">+ TAMBAH KATEGORI</a>
     <br>
+    <br>
+    <a href="index.php">MENU</a>
     <br>
     <table border='1'>
         <tr>
@@ -31,7 +46,7 @@
                 <td><?php echo $no++; ?></td>
                 <td><?php echo $d['id_kategri']; ?></td>
                 <td><?php echo $d['nama_kategori']; ?></td>
-                <td><?php echo $d['diskon_kategori'].'%'; ?></td>
+                <td><?php echo $d['diskon_kategori'] . '%'; ?></td>
                 <td>
                     <a href="edit_kategori.php?id=<?php echo $d['id']; ?>">EDIT</a> |
                     <a href="hapus_kategori.php?id=<?php echo $d['id']; ?>">HAPUS</a>
