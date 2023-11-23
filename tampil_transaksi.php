@@ -5,6 +5,8 @@ if (!isset($_SESSION["nama"])) {
     header("Location: login.php");
     exit;
 }
+
+$level = $_SESSION['level'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,22 +23,7 @@ if (!isset($_SESSION["nama"])) {
     <a href="input_transaksi.php">+ TAMBAH TRANSAKSI</a>
     <br>
     <br>
-    <?php
-    if ($_SESSION['level'] == 2 && $_SESSION['status'] == 1) {
-    ?>
-    <a href="view_report.php">View Report</a>
-    <br>
-    <a href="logout.php">LOGOUT</a>
-    <?php
-    } else  if ($_SESSION['level'] == 1 && $_SESSION['status'] == 1) {
-    ?>
-        <a href="index.php">MENU</a>
-    <?php
-    }
-    ?>
-    <br>
-    <!-- <a href="logout.php">LOGOUT</a> -->
-    <br>
+    <a href="index.php">MENU</a>
     <br>
     <table border='1'>
         <tr>
@@ -49,7 +36,9 @@ if (!isset($_SESSION["nama"])) {
             <th>Jumlah Transaksi</th>
             <th>User</th>
             <th>Member</th>
+        <?php if ($level != 2) : ?>
             <th>OPSI</th>
+        <?php endif; ?>
         </tr>
         <?php
         include 'koneksi.php';
@@ -68,10 +57,12 @@ if (!isset($_SESSION["nama"])) {
                 <td><?php echo $d['jumlah_transaksi']; ?></td>
                 <td><?php echo $d['nama']; ?></td>
                 <td><?php echo $d['nama_member']; ?></td>
-                <td>
-                    <a href="edit_transaksi.php?id=<?php echo $d['id']; ?>">EDIT</a> |
-                    <a href="hapus_transaksi.php?id=<?php echo $d['id']; ?>">HAPUS</a>
-                </td>
+                <?php if ($level != 2) : ?>
+                    <td>
+                        <a href="edit_transaksi.php?id=<?php echo $d['id']; ?>">EDIT</a> |
+                        <a href="hapus_transaksi.php?id=<?php echo $d['id']; ?>">HAPUS</a>
+                    </td>
+                <?php endif; ?>
             </tr>
         <?php
         }

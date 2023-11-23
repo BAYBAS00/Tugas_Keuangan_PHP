@@ -23,7 +23,7 @@ if (!empty($_POST["save"])) {
     $jenisTransaksi = $_POST["jenis_transaksi"];
     $barangId = $_POST["barang_id"];
     $jumlahTransaksi = $_POST["jumlah_transaksi"];
-    $userId = $_POST["user_id"];
+    $userId = $_SESSION["id_user"];
     $memberID = $_POST["member_id"];
     //input data ke database
     $a = mysqli_query($koneksi, "insert into transaksi values ('','$tglTransaksi','$noTransaksi','$jenisTransaksi',
@@ -78,23 +78,6 @@ if (!empty($_POST["save"])) {
             <tr>
                 <td>Jumlah Transaksi</td>
                 <td><input type="number" name="jumlah_transaksi"></td>
-            </tr>
-            <tr>
-                <td>User</td>
-                <td>
-                    <select name="user_id" id="user_id">
-                        <option value="">--Pilih--</option>
-                        <?php
-                        $data = mysqli_query($koneksi, 'select * from user');
-
-                        while ($d = mysqli_fetch_array($data)) {
-                        ?>
-                            <option value="<?= $d['id_user']; ?>"><?= $d['nama']; ?></option>
-                        <?php
-                        }
-                        ?>
-                    </select>
-                </td>
             </tr>
             <tr>
                 <td>Member</td>

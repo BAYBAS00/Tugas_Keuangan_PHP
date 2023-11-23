@@ -12,9 +12,9 @@ if (!isset($_SESSION["nama"])) {
     header("Location: login.php");
     exit;
 }
-if ($_SESSION['level'] == 2 && $_SESSION['status'] == 1) {
+if (($_SESSION['level'] == 2 || $_SESSION['level'] == 3 || $_SESSION['level'] == 4) && $_SESSION['status'] == 1) {
     // Login berhasil dengan level staff dan status aktif, arahkan ke halaman lain
-    header("location: tampil_transaksi.php");
+    header("location: index.php");
     exit(); // Berhenti eksekusi skrip setelah mengalihkan header
 }
 // koneksi ke database

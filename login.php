@@ -34,22 +34,15 @@ if (isset($_POST['login'])) {
                     $_SESSION['nama'] = $username;
                     $_SESSION['level'] = $d['level'];
                     $_SESSION['status'] = $d['status'];
+                    $_SESSION['id_user'] = $d['id_user'];
 
-                    if ($_SESSION['level'] == 1 && $_SESSION['status'] == 1) {
-                        // Login berhasil dengan level admin dan status aktif, arahkan ke halaman lain
+                    if ($_SESSION['status'] == 1) {
                         header("location: index.php");
-                        exit();
-                    } else if ($_SESSION['level'] == 2 && $_SESSION['status'] == 1) {
-                        // Login berhasil dengan level staff dan status aktif, arahkan ke halaman lain
-                        header("location: tampil_transaksi.php");
-                        exit();// Berhenti eksekusi skrip setelah mengalihkan header
+                        exit;
+                        }
                     }
                 }
-            }
                 
-                // Login berhasil, arahkan ke halaman lain
-                // header('Location: index.php');
-                // exit(); // Berhenti eksekusi skrip setelah mengalihkan header
             }
         }
     }

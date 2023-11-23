@@ -5,11 +5,9 @@ if (!isset($_SESSION["nama"])) {
     header("Location: login.php");
     exit;
 }
-if ($_SESSION['level'] == 2 && $_SESSION['status'] == 1) {
-    // Login berhasil dengan level staff dan status aktif, arahkan ke halaman lain
-    header("location: tampil_transaksi.php");
-    exit(); // Berhenti eksekusi skrip setelah mengalihkan header
-}
+
+$level = $_SESSION['level'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,24 +22,32 @@ if ($_SESSION['level'] == 2 && $_SESSION['status'] == 1) {
     <h3>PEMOGRAMAN 3</h3>
     <a href="logout.php">LOGOUT</a>
     <table>
-        <tr>
-            <td><a href="tampil_barang.php">BARANG</a></td>
-        </tr>
-        <tr>
-            <td><a href="tampil_kategori.php">KATEGORI</a></td>
-        </tr>
-        <tr>
-            <td><a href="tampil_level.php">LEVEL</a></td>
-        </tr>
-        <tr>
-            <td><a href="tampil_member.php">MEMBER</a></td>
-        </tr>
+        <?php
+            if ($level !=2) {
+        ?>
+            <tr>
+                <td><a href="tampil_barang.php">BARANG</a></td>
+            </tr>
+            <tr>
+                <td><a href="tampil_kategori.php">KATEGORI</a></td>
+            </tr>
+            <tr>
+                <td><a href="tampil_level.php">LEVEL</a></td>
+            </tr>
+            <tr>
+                <td><a href="tampil_member.php">MEMBER</a></td>
+            </tr>
+        <?php } ?>
         <tr>
             <td><a href="tampil_transaksi.php">TRANSAKSI</a></td>
         </tr>
-        <tr>
-            <td><a href="tampil_user.php">USER</a></td>
-        </tr>
+        <?php
+        if ($level == 1) {
+        ?>
+            <tr>
+                <td><a href="tampil_user.php">USER</a></td>
+            </tr>
+        <?php } ?>
         <tr>
             <td><a href="view_report.php">LAPORAN</a></td>
         </tr>

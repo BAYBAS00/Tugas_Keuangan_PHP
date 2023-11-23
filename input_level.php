@@ -15,7 +15,7 @@ if (!isset($_SESSION["nama"])) {
 }
 if ($_SESSION['level'] == 2 && $_SESSION['status'] == 1) {
     // Login berhasil dengan level staff dan status aktif, arahkan ke halaman lain
-    header("location: tampil_transaksi.php");
+    header("location: index.php");
     exit(); // Berhenti eksekusi skrip setelah mengalihkan header
 }
 // koneksi ke database
@@ -25,6 +25,7 @@ if (!empty($_POST["save"])) {
 
     $Level = $_POST["jenis_level"];
     $Diskon = $_POST["jumlah_diskon_lvl"];
+
     //input data ke database
     $a = mysqli_query($koneksi, "insert into level values ('','$Level','$Diskon')");
     if ($a) {
@@ -43,6 +44,7 @@ if (!empty($_POST["save"])) {
     <br>
     <br>
     <h3>TAMBAH DATA LEVEL</h3>
+
     <form method="POST">
         <table>
             <tr>

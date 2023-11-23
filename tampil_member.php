@@ -7,7 +7,7 @@ if (!isset($_SESSION["nama"])) {
 }
 if ($_SESSION['level'] == 2 && $_SESSION['status'] == 1) {
     // Login berhasil dengan level staff dan status aktif, arahkan ke halaman lain
-    header("location: tampil_transaksi.php");
+    header("location: index.php");
     exit(); // Berhenti eksekusi skrip setelah mengalihkan header
 }
 ?>
@@ -48,8 +48,8 @@ if ($_SESSION['level'] == 2 && $_SESSION['status'] == 1) {
                 <td><?php echo $d['nama_member']; ?></td>
                 <td><?php echo $d['jenis_level']; ?></td>
                 <td>
-                    <a href="edit_kategori.php?id=<?php echo $d['id']; ?>">EDIT</a> |
-                    <a href="hapus_kategori.php?id=<?php echo $d['id']; ?>">HAPUS</a>
+                    <a href="edit_member.php?id=<?php echo $d['id']; ?>">EDIT</a> |
+                    <a href="hapus_member.php?id=<?php echo $d['id']; ?>">HAPUS</a>
                 </td>
             </tr>
         <?php

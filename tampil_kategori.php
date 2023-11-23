@@ -7,7 +7,7 @@ if (!isset($_SESSION["nama"])) {
 }
 if ($_SESSION['level'] == 2 && $_SESSION['status'] == 1) {
     // Login berhasil dengan level staff dan status aktif, arahkan ke halaman lain
-    header("location: tampil_transaksi.php");
+    header("location: index.php");
     exit(); // Berhenti eksekusi skrip setelah mengalihkan header
 }
 ?>

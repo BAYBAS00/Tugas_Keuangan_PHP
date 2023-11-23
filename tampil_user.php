@@ -7,9 +7,20 @@ if (!isset($_SESSION["nama"])) {
 }
 if ($_SESSION['level'] == 2 && $_SESSION['status'] == 1) {
     // Login berhasil dengan level staff dan status aktif, arahkan ke halaman lain
-    header("location: tampil_transaksi.php");
+    header("location: index.php");
     exit(); // Berhenti eksekusi skrip setelah mengalihkan header
 }
+// include 'koneksi.php';
+// $level = $_SESSION['level'];
+// $edit_hapus_liat = false;
+// if ($level == 1) {
+//     $edit_hapus_liat = true;
+// } elseif ($level == 4) {
+//     $edit_hapus_liat = true;
+// } elseif ($level == 3) {
+//     $edit_hapus_liat = true;
+// }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,10 +62,16 @@ if ($_SESSION['level'] == 2 && $_SESSION['status'] == 1) {
                 <td><?php echo $d['password']; ?></td>
                 <td><?php echo $d['level']; ?></td>
                 <td><?php echo $d['status']; ?></td>
-                <td>
-                    <a href="edit_user.php?id=<?php echo $d['id']; ?>">EDIT</a> |
-                    <a href="hapus_user.php?id=<?php echo $d['id']; ?>">HAPUS</a>
-                </td>
+                <?php if ($edit_hapus_liat) : ?>
+                    <td>
+                        <?php if ($level == 1 || ($level == 4 && ($d['level'] == 3 || $d['level'] == 2)) || ($level == 3 && $d['level'] == 2)) : ?>
+                            <a href="edit_user.php?id=<?php echo $d['id']; ?>">EDIT</a> |
+                        <?php endif; ?>
+                        <?php if ($level == 1 || ($level == 4 && ($d['level'] == 3 || $d['level'] == 2)) || ($level == 3 && $d['level'] == 2)) : ?>
+                            <a href="hapus_user.php?id=<?php echo $d['id']; ?>">HAPUS</a>
+                        <?php endif; ?>
+                    </td>
+                <?php endif ?>
             </tr>
         <?php
         }
