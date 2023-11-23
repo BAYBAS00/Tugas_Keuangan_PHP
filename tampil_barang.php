@@ -10,17 +10,6 @@ if ($_SESSION['level'] == 2 && $_SESSION['status'] == 1) {
     header("location: index.php");
     exit(); // Berhenti eksekusi skrip setelah mengalihkan header
 }
-
-// $level = $_SESSION['level'];
-// $edit_hapus_liat = false;
-// if ($level == 1) {
-//     $edit_hapus_liat = true;
-// } elseif ($level == 4) {
-//     $edit_hapus_liat = true;
-// } elseif ($level == 3) {
-//     $edit_hapus_liat = true;
-// }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,11 +53,9 @@ if ($_SESSION['level'] == 2 && $_SESSION['status'] == 1) {
                 <td><?php echo $d['qty']; ?></td>
                 <td><?php echo $d['harga']; ?></td>
                 <td><?php echo $d['nama_kategori']; ?></td>
-                <td>
-                    <?php if ($level != 2) : ?>
+                <td>                
                         <a href="edit_barang.php?id=<?php echo $d['id']; ?>">EDIT</a> |
                         <a href="hapus_barang.php?id=<?php echo $d['id']; ?>">HAPUS</a>
-                    <?php endif; ?>
                 </td>
             </tr>
         <?php
